@@ -1,6 +1,6 @@
 context:
   name: git-extras
-  version: "7.4.0"
+  version: "7.5.0"
 
 package:
   name: ${{ name }}
@@ -8,17 +8,14 @@ package:
 
 source:
   url: https://github.com/tj/git-extras/archive/refs/tags/${{ version }}.tar.gz
-  sha256: aaab3bab18709ec6825a875961e18a00e0c7d8214c39d6e3a63aeb99fa11c56e
+  sha256: bcfe0eabdccc806e53a10130fed6fb02373720ddeb670eecc5cc84d041d79880
 
 build:
   number: 0
   skip: win
   script:
     - export SKIP_CONFLICT_CHECK=yes
-    - make install
-        PREFIX="${PREFIX}"
-        SYSCONFDIR="${PREFIX}/etc"
-        COMPL_DIR="${PREFIX}/etc/bash_completion.d"
+    - make install PREFIX="${PREFIX}" SYSCONFDIR="${PREFIX}/etc" COMPL_DIR="${PREFIX}/etc/bash_completion.d"
     - install -d "${PREFIX}/share/zsh/site-functions"
     - install -m 644 etc/git-extras-completion.zsh "${PREFIX}/share/zsh/site-functions/_git-extras"
     - install -d "${PREFIX}/share/fish/vendor_completions.d"
