@@ -11,14 +11,11 @@ source:
   sha256: aaab3bab18709ec6825a875961e18a00e0c7d8214c39d6e3a63aeb99fa11c56e
 
 build:
-  number: 0
+  number: 1
   skip: win
   script:
     - export SKIP_CONFLICT_CHECK=yes
-    - make install
-        PREFIX="${PREFIX}"
-        SYSCONFDIR="${PREFIX}/etc"
-        COMPL_DIR="${PREFIX}/etc/bash_completion.d"
+    - make install PREFIX="${PREFIX}" SYSCONFDIR="${PREFIX}/etc" COMPL_DIR="${PREFIX}/etc/bash_completion.d"
     - install -d "${PREFIX}/share/zsh/site-functions"
     - install -m 644 etc/git-extras-completion.zsh "${PREFIX}/share/zsh/site-functions/_git-extras"
     - install -d "${PREFIX}/share/fish/vendor_completions.d"
@@ -27,11 +24,11 @@ build:
 requirements:
   build:
     - make
-    - util-linux  # provides `column`, required by check_dependencies.sh
+    - util-linux # provides `column`, required by check_dependencies.sh
   run:
     - bash
     - git
-    - util-linux  # provides `column`, used by `git extras` summary output
+    - util-linux # provides `column`, used by `git extras` summary output
 
 tests:
   - script:
